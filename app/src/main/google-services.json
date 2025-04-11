@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "70197170191",
+    "project_id": "kosarlabdaapp",
+    "storage_bucket": "kosarlabdaapp.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:70197170191:android:474d25613aee661fd8137a",
+        "android_client_info": {
+          "package_name": "com.example.kosarlabda"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "70197170191-roefjlonku69hdj81qgcbuvvvpc31v4f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.kosarlabda",
+            "certificate_hash": "780d7465d23ca0ecde802e6c2a92c3c2d71cfc70"
+          }
+        },
+        {
+          "client_id": "70197170191-7avfn7b2itnlt6t2oic67p34svphgu2a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDISxsPAPxKzJIrMVHFszzA_Navf_tuVe0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "70197170191-7avfn7b2itnlt6t2oic67p34svphgu2a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
