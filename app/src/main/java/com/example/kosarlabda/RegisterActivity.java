@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -20,11 +21,13 @@ import com.google.firebase.auth.FirebaseUser;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.airbnb.lottie.LottieAnimationView;
+
 public class RegisterActivity extends AppCompatActivity {
 
     private EditText nameEditText, emailEditText, passwordEditText, passwordEditText2;
-    private Button registerButton;
-    private ProgressBar progressBar;
+    private Button registerButton, backButton;
+    private LottieAnimationView loadingAnimation;
     private TextView successMessageTextView;
 
     private FirebaseAuth mAuth;
@@ -45,9 +48,12 @@ public class RegisterActivity extends AppCompatActivity {
         passwordEditText = findViewById(R.id.passwordEditText);
         passwordEditText2 = findViewById(R.id.passwordEditText2);
         registerButton = findViewById(R.id.registerButton);
-        progressBar = findViewById(R.id.progressBar);
+        backButton = findViewById(R.id.backButton);
+        loadingAnimation = findViewById(R.id.loadingAnimation);
         successMessageTextView = findViewById(R.id.successMessageTextView);
         // New textView
+
+        backButton.setOnClickListener(v -> finish());
 
         // Register button event
         registerButton.setOnClickListener(v -> {
@@ -67,11 +73,13 @@ public class RegisterActivity extends AppCompatActivity {
                 return;
             }
 
-            progressBar.setVisibility(View.VISIBLE);
+            loadingAnimation.setVisibility(View.VISIBLE);
+            loadingAnimation.playAnimation();
 
             mAuth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener(task -> {
-                        progressBar.setVisibility(View.GONE);
+                        loadingAnimation.cancelAnimation();
+                        loadingAnimation.setVisibility(View.GONE);
                         if (!task.isSuccessful()) {
                             Toast.makeText(RegisterActivity.this, "Hiba: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                             return;
@@ -95,8 +103,7 @@ public class RegisterActivity extends AppCompatActivity {
                                     successMessageTextView.setVisibility(View.VISIBLE); // Make it visible
                                     successMessageTextView.setText("Sikeres regisztráció! Átirányítás...");
 
-                                    // Debugging Toast
-                                    Toast.makeText(RegisterActivity.this, "TextView should be visible now", Toast.LENGTH_SHORT).show();
+
 
                                     new Handler().postDelayed(() -> {
                                         Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);

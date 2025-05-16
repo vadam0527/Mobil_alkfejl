@@ -41,6 +41,7 @@ dependencies {
     implementation(libs.activity)
     implementation(libs.constraintlayout)
     implementation(libs.firebase.firestore)
+    implementation(libs.google.material)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
@@ -54,6 +55,10 @@ dependencies {
     implementation(libs.google.firebase.auth) // Latest Firebase Auth
     implementation(libs.firebase.firestore.v24101) // Latest Firestore
     implementation(libs.play.services.auth) // Google Sign-In (important!)
+
+    implementation("com.google.android.material:material:1.10.0")
+
+    implementation("com.airbnb.android:lottie:6.1.0")
 
 
 

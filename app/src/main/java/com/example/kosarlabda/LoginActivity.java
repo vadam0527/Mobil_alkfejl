@@ -12,12 +12,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 
+import com.airbnb.lottie.LottieAnimationView;
+
 public class LoginActivity extends AppCompatActivity {
 
     private EditText emailEditText, passwordEditText;
     private Button loginButton, registerButton;
-    private ProgressBar progressBar;
     private FirebaseAuth mAuth;
+
+    private LottieAnimationView loadingAnimation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +35,7 @@ public class LoginActivity extends AppCompatActivity {
         passwordEditText = findViewById(R.id.passwordEditText);
         loginButton = findViewById(R.id.loginButton);
         registerButton = findViewById(R.id.registerButton);
-        progressBar = findViewById(R.id.progressBar);
+        loadingAnimation = findViewById(R.id.loadingAnimation);
 
         // Bejelentkezés
         loginButton.setOnClickListener(v -> loginUser());
@@ -54,11 +57,13 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
-        progressBar.setVisibility(View.VISIBLE);
+        loadingAnimation.setVisibility(View.VISIBLE);
+        loadingAnimation.playAnimation();
 
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
-                    progressBar.setVisibility(View.GONE);
+                    loadingAnimation.cancelAnimation();
+                    loadingAnimation.setVisibility(View.GONE);
                     if (task.isSuccessful()) {
                         Toast.makeText(this, "Sikeres bejelentkezés", Toast.LENGTH_SHORT).show();
                         // Navigálás a főképernyőre
@@ -79,11 +84,13 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
-        progressBar.setVisibility(View.VISIBLE);
+        loadingAnimation.setVisibility(View.VISIBLE);
+        loadingAnimation.playAnimation();
 
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
-                    progressBar.setVisibility(View.GONE);
+                    loadingAnimation.cancelAnimation();
+                    loadingAnimation.setVisibility(View.GONE);
                     if (task.isSuccessful()) {
                         Toast.makeText(this, "Sikeres regisztráció", Toast.LENGTH_SHORT).show();
                         // Belépés regisztráció után, vagy visszatérés loginra
