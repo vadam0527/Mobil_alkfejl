@@ -114,16 +114,9 @@ public class AddMatchActivity extends AppCompatActivity {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
                         if (!alarmManager.canScheduleExactAlarms()) {
-                            new AlertDialog.Builder(this)
-                                    .setTitle("Pontos riasztás szükséges")
-                                    .setMessage("Ahhoz, hogy az alkalmazás pontos időben értesítést tudjon küldeni (pl. mérkőzés előtt), engedélyezd a pontos riasztást az alkalmazás beállításaiban.")
-                                    .setPositiveButton("Beállítások megnyitása", (dialog, which) -> {
-                                        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                                        intent.setData(Uri.parse("package:" + getPackageName()));
-                                        startActivity(intent);
-                                    })
-                                    .setNegativeButton("Mégse", null)
-                                    .show();
+                            Intent alarmIntent = new Intent(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM);
+                            startActivity(alarmIntent);
+                            Toast.makeText(this, "Engedélyezd a pontos riasztásokat!", Toast.LENGTH_LONG).show();
                         }
                     }
 
